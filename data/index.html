@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- 
+  FishNet wifi setup
+-->
+<html>
+<head>
+    <title>FishNet Fish Configuration Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+        function validateForm() {
+            var x = document.forms["FishWifi"]["SSID"].value;
+            var y = document.forms["FishWifi"]["Password"].value;
+
+            if (x == "" || x == null || y == "" || y == null ) {
+                alert("No fields can be blank for the SSID, Password!");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>FishNet Configuration Page</h1>
+    <br>
+    <table>
+        <caption>Configuration</caption>
+        <form name="FishWifi" action="/" method="POST" onsubmit="return validateForm()" required>
+            <tr>
+                <td>
+                    <label for="ssid">Wifi SSID (name):</label>
+                    <input type="text" id="SSID" name="SSID">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="pass">Password:</label>
+                    <input type="text" id="Password" name="Password">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="submitbutton" type="submit" value="Submit">
+                </td>
+            </tr>
+        </form>
+
+    </table>
+
+    <!--
+      go get the last error string from the arduino code.  it is blank unless the previous run had an error.
+    -->
+    <p id="errorString">%ERRORSTRING%</p>
+    <script>
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open("GET", "errorString", false);
+        xhttp.send();
+        document.getElementById("errorString").innerHTML = xhttp.responseText;
+    </script>
+
+    <!--
+      acquire the network wifi list from arduino.  The code below injects a table that the arduino code builds
+    -->
+    <h1>Available Networks</h1>
+
+    <span id="netList">%NETLIST%</span>
+    <script>
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open("GET", "netList", false);
+        xhttp.send();
+        document.getElementById("netList").innerHTML = xhttp.responseText;
+    </script>
+
+

@@ -1,0 +1,24 @@
+html {
+  font-family: Arial;
+  display: inline-block;
+  margin: 0px auto;
+  text-align: center;
+}
+h1 {
+  color: #0F3376;
+  padding: 2vh;
+}
+p {
+  font-size: 1.5rem;
+}
+table {
+  margin-right: auto;
+  margin-left: auto;
+}
+th, td {
+  border: 1px solid black;
+  padding: 2px;
+}
+#errorString {
+  color: #ff0000;
+}
